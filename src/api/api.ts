@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const api = {
     getRequest(q: string) {
         return axios.get<GetType>(`http://api.openweathermap.org/data/2.5/weather?q=${q}&units=metric&appid=e49884ac099317c54fb2fa8c00755bf8`)

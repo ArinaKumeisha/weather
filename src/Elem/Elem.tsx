@@ -1,26 +1,20 @@
 import React from 'react';
 import s from './Elems.module.css'
+import {ObjType} from "../Bll/weatherReducer";
 
-export type ElemType = {
-    name: string
-    temperature: number
-    humidity: number
-    pressure: number
-    wind: number
-}
-type PropsType = {
-    elem: ElemType
-}
-export const Elem = (props: PropsType) => {
-    const {elem} = props
 
+export const Elem = (props: ObjType) => {
+    const {name, temp, speed, pressure, humidity, dt, deg} = props;
     return (
         <div className={s.elem}>
-            <h2>City: {elem.name}</h2>
-            <div>Temperature: {elem.temperature}</div>
-            <div>Wind: {elem.wind}</div>
-            <div>Pressure: {elem.pressure}</div>
-            <div>Humidity:{elem.humidity}</div>
+            <h2>City: {name}</h2>
+            <div>Temperature: {temp}</div>
+            <div>Wind: {deg}{speed}</div>
+            <div>Pressure: {pressure}</div>
+            <div>Humidity:{humidity}</div>
+            <div>dt:{dt}</div>
+            <button>delete</button>
+            <button>update</button>
         </div>
     )
 }

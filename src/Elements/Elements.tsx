@@ -1,68 +1,49 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
-import {api} from "../api/api";
+import React, {ChangeEvent, useState} from 'react';
 import s from './Elements.module.css'
-import {Elem, ElemType} from '../Elem/Elem'
+import {Elem} from '../Elem/Elem'
+import {useDispatch, useSelector} from "react-redux";
+import {fetch, ObjType} from "../Bll/weatherReducer";
+import {AppStoreType} from "../Bll/store";
 
 export const Elements = () => {
-    const getData = () => {
-        const data = localStorage.getItem('elems')
-        if (data) {
-            return JSON.parse(data)
-        } else {
-            return []
-        }
-    }
+    const cities = useSelector<AppStoreType, ObjType[]>(state => state.weather.cities)
+    const dispatch = useDispatch()
 
     const [name, setName] = useState<string>('')
-    const [error, setError] = useState('error')
-    const [elems, setElems] = useState<ElemType[]>(getData())
-
-    useEffect(() => {
-        localStorage.setItem('elems', JSON.stringify(elems))
-
-    }, [elems])
-
     const onchangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value)
     }
-
-    const addHandler = async () => {
-        const res = await api.getRequest(name)
-        try {
-            if (res.status === 200) {
-                const elem: ElemType = {
-                    name: res.data.name,
-                    temperature: res.data.main.temp,
-                    humidity: res.data.main.humidity,
-                    pressure: res.data.main.pressure,
-                    wind: res.data.wind.speed,
-                }
-
-                localStorage.setItem('elems', JSON.stringify(elems))
-                const newElems = localStorage.getItem('elems')
-                const el = newElems && JSON.parse(newElems)
-                setElems([...el, elem])
-            }
-        } catch (e: any) {
-            setError(e)
-        }
+    const addHandler = () => {
+        dispatch(fetch(cities, name))
     }
 
     return (
         <div className={s.container}>
             <div className={s.btn}>
+
                 <input
                     value={name}
-                    onChange={onchangeHandler}/>
+                    onChange={onchangeHandler}
+                />
 
                 <button
                     onClick={addHandler}>Add
                 </button>
             </div>
             <div className={s.block}>
-                {elems.map((e, index) => {
+
+                {cities.map(e => {
                     return (
-                        <Elem key={index} elem={e}/>)
+                        <Elem
+                            name={e.name}
+                            pressure={e.pressure}
+                            humidity={e.humidity}
+                            deg={e.deg}
+                            temp={e.temp}
+                            id={e.id}
+                            key={e.id}
+                            dt={e.dt}
+                            speed={e.speed}/>)
                 })}
             </div>
         </div>

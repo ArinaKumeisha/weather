@@ -1,0 +1,7 @@
+export enum ACTION_TYPE {
+    GET_CITY = 'WEATHER/GET_NAME',
+    GET_MAIN = 'WEATHER/GET_MAIN',
+    GET_WIND = 'WEATHER/GET_WIND',
+    ADD = 'ADD'
+
+}
