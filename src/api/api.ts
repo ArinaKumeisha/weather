@@ -8,22 +8,25 @@ export const api = {
 
 type GetType = {
     status: number
+    text: string
     "coord": {
         "lon": number
         "lat": number
     },
-    "weather":WeatherType[]
-    "base":string
-    "main":MainType
-    "visibility":number
-    "wind":{"speed":number, "deg":number}
-    "clouds":{"all":number}
-    "dt":number,
-    "sys":SysType
-    "timezone":number
-    "id":number
-    "name":string
-    "cod":number
+    "weather": WeatherType[]
+    "base": string
+    "main": MainType
+    "visibility": number
+    "wind": { "speed": number, "deg": number }
+    "clouds": { "all": number }
+    "dt": number,
+    "sys": SysType
+    "timezone": number
+    "id": number
+    "name": string
+    "cod": number
+    'message': string
+
 }
 
 type WeatherType = {
@@ -33,19 +36,19 @@ type WeatherType = {
     "icon": string
 }
 type MainType = {
-    "temp":number,
-    "feels_like":number,
-    "temp_min":number,
-    "temp_max":number,
+    "temp": number,
+    "feels_like": number,
+    "temp_min": number,
+    "temp_max": number,
     "pressure": number,
-    "humidity":number
+    "humidity": number
 }
 type SysType = {
-    "type":number,
-    "id":number,
-    "country":string,
-    "sunrise":number,
-    "sunset":number
+    "type": number,
+    "id": number,
+    "country": string,
+    "sunrise": number,
+    "sunset": number
 }
 
 

@@ -5,12 +5,15 @@ import {ACTION_TYPE} from "./enum";
 
 const initialState = {
     cities: [] as ObjType[],
+    error: ''
 }
 export type InitialStateType = typeof initialState
 export const weatherReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case ACTION_TYPE.GET_CITY:
-            return {...state, cities: [...state.cities, action.obj]}
+            return {...state, cities: [action.obj, ...state.cities]}
+        case ACTION_TYPE.SET_ERROR:
+            return {...state, error: action.error}
         default:
             return state
 
@@ -18,7 +21,10 @@ export const weatherReducer = (state = initialState, action: ActionType): Initia
 }
 
 export const getCityAC = (obj: ObjType) => (
-    {type: ACTION_TYPE.GET_CITY, obj}
+    {type: ACTION_TYPE.GET_CITY, obj} as const
+)
+export const setErrorAC = (error: string) => (
+    {type: ACTION_TYPE.SET_ERROR, error} as const
 )
 export type ObjType = {
     name: string,
@@ -30,10 +36,11 @@ export type ObjType = {
     deg: number,
     speed: number,
 }
-export const fetch = ( cities: any, city: string) => {
+export const fetch = (cities: ObjType[], city: string) => {
     return async (dispatch: Dispatch<ActionType>) => {
         const res = await api.getRequest(city)
-       const obj: ObjType = {
+        console.log(res)
+        const obj: ObjType = {
             name: res.data.name,
             id: res.data.id,
             dt: res.data.dt,
@@ -45,18 +52,19 @@ export const fetch = ( cities: any, city: string) => {
 
         }
         try {
+            const existCity = cities.some(city => city.id === obj.id)
+            if (existCity) {
+                dispatch(setErrorAC('this city have added'))
+            } else {
                 dispatch(getCityAC(obj))
-
-        } catch
-            (e: any) {
-
+            }
+        } catch (e: any) {
+            dispatch(setErrorAC('checked request please'))
 
         }
+
     }
 }
-
-// type GetMainType = ReturnType<typeof getMainAC>
+type SetErrorType = ReturnType<typeof setErrorAC>
 type GetCityType = ReturnType<typeof getCityAC>
-// type GetWindType = ReturnType<typeof getWindAC>
-
-type ActionType = GetCityType  /*GetMainType | GetWindType*/
+type ActionType = GetCityType | SetErrorType
