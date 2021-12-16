@@ -1,0 +1,15 @@
+
+.elem {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 250px;
+    justify-content: space-around;
+    padding: 30px;
+    background-color: #d9c8e9;
+    border-radius: 15px;
+    box-shadow: 10px 1px 10px rgba(15,11,15,15);
+    margin: 10px;
+
+}

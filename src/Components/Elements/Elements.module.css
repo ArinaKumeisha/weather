@@ -1,0 +1,14 @@
+
+.block {
+    min-height: 120vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    flex-wrap: wrap;
+    background-image: url('/src/common/styles/sky.jpg');
+}
+
+.btn {
+    margin: 20px;
+}
