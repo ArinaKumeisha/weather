@@ -1,18 +1,28 @@
 .container {
-  display: flex;
   min-height: 50px;
-  justify-content: center;
-  padding: 30px;
-  //background-image: url('/src/common/styles/sky.jpg');
   background-color: #aeabc1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .name {
+    font-size: 23px;
+    color: white;
+    text-shadow: 3px 3px 3px black;
 
-  .input {
-    width: 170px;
-    height: 34px;
-    font-size: 18px;
-    border: none;
-    background-color: #e8e2f3;
-    border-radius: 7px 0 0 7px;
-    box-shadow: 0 7px 10px rgba(19, 11, 11, 0.96);
+  }
+  .settings {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+
+    .input {
+      width: 170px;
+      height: 32px;
+      border: none;
+      background-color: #e8e2f3;
+      border-radius: 7px 0 0 7px;
+      box-shadow: 0 7px 10px rgba(19, 11, 11, 0.96);
+      font-size: 14px;
+    }
   }
 }

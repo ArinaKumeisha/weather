@@ -26,22 +26,24 @@ export const Search = (props: PropsType) => {
         dispatch(fetch(cities, useName))
         setUseName('')
     }
-    const onKeyPressHandler = (e: any) =>{
-        if(e.key === 'Enter'){
+    const onKeyPressHandler = (e: any) => {
+        if (e.key === 'Enter') {
             addHandler()
         }
     }
     return (
-        <div className={s.container}>
+<div className={s.container}>
+        <h3 className={s.name}>Weather in your city</h3>
+        <div className={s.settings}>
 
             <input
                 value={useName}
                 onChange={onchange}
                 onFocus={() => dispatch(setErrorAC(''))}
                 className={s.input}
+                placeholder={'enter city'}
                 onKeyPress={onKeyPressHandler}
             />
-
 
             <button
                 onClick={addHandler}
@@ -49,6 +51,7 @@ export const Search = (props: PropsType) => {
                 Add
             </button>
         </div>
+</div>
     );
 };
 
