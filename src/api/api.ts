@@ -6,7 +6,7 @@ export const api = {
     }
 }
 
-type GetType = {
+type GetType = {   //type getRequest
     status: number
     text: string
     "coord": {
