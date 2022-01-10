@@ -10,11 +10,9 @@ type PropsType = {
 export const Settings = (props: PropsType) => {
     const {name} = props
     const dispatch = useDispatch()
-
     const updateHandler = () => {
         dispatch(updateData(name))
     }
-
     const deleteHandler = () => {
         dispatch(deleteData(name))
     }

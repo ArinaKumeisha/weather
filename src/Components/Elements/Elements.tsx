@@ -12,10 +12,6 @@ export const Elements = (props: PropsType) => {
 
     const {cities} = props
 
-    // const filtered = cities.filter(c => {
-    //     return c.name.toLowerCase().includes(name.toLowerCase())
-    // })
-
     return (
         <div className={s.block}>
             {cities.map((e) => {
